@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "02ytGHiSzy312iMY8G/R8l9ECZ5JMfvHzf+O320zfHrqy11dQEkKPHxdEgWVXXp9dAjcCaBfrGVBaeQkV1PpZQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Stephanie\\RiderProjects\\GymTEC-API\\GymTEC-API\\GymTEC-API.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Stephanie\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Stephanie\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Stephanie\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Stephanie\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Stephanie\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Stephanie\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
