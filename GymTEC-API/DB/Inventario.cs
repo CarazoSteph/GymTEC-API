@@ -18,5 +18,35 @@
             this.costo = costo;
             this.sucursal = sucursal;
         }
+
+        public string TipoMaquina
+        {
+            get => tipoMaquina;
+            set => tipoMaquina = value;
+        }
+
+        public string Marca
+        {
+            get => marca;
+            set => marca = value;
+        }
+
+        public int NumSerie
+        {
+            get => numSerie;
+            set => numSerie = value;
+        }
+
+        public int Costo
+        {
+            get => costo;
+            set => costo = value;
+        }
+
+        public string Sucursal
+        {
+            get => sucursal;
+            set => sucursal = value;
+        }
     }
 }
