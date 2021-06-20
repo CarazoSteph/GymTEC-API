@@ -11,41 +11,41 @@ namespace GymTEC_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TipoPlanillaController : ControllerBase
+    public class PuestoController : ControllerBase
     {
         [HttpPost]
-        [Route("agregarTipoPlanilla")]
+        [Route("agregarPuesto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta insertar_TipoPlanilla(TipoPlanilla tipoPlanilla)
+        public respuesta insertar_Puesto(Puesto puesto)
         {
-            Administrador.insertar_TipoPlanilla(tipoPlanilla);
+            Administrador.insertar_Puesto(puesto);
             return new respuesta("agregado"); 
         }
         
         [HttpPost]
-        [Route("editarTipoPlanilla")]
+        [Route("editarPuesto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta editar_TipoPlanilla(TipoPlanilla tipoplanilla)
+        public respuesta editar_Puesto(Puesto puesto)
         {
-            Administrador.editar_TipoPlanilla(tipoplanilla);
+            Administrador.editar_Puesto(puesto);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("eliminarTipoPlanilla")]
+        [Route("eliminarPuesto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta eliminar_TipoPlanilla(TipoPlanilla tipoPlanilla)
+        public respuesta eliminar_Puesto(Puesto puesto)
         {
-            Administrador.eliminar_TipoPlanilla(tipoPlanilla);
+            Administrador.eliminar_Puesto(puesto);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("buscarTipoPlanilla")]
+        [Route("buscarPuesto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<TipoPlanilla> buscar_TipoPlanilla(string entrada)
+        public IList<Puesto> buscar_Puesto(string entrada)
         {
-            return Administrador.Buscar_TipoPlanilla(entrada);
+            return Administrador.Buscar_Puesto(entrada);
             
         }
         

@@ -14,7 +14,7 @@
         public string tienda;
 
         //contructor
-        public Sucursal(string nombre, string direccion, string fechaApertura, string horarioAtencion, string empleadoAdmin, int capacidadMax, int numTelefono, string spa, string tienda)
+        public Sucursal(string nombre, string direccion, string fechaApertura, string horarioAtencion, string empleadoAdmin, int capacidadMax, int numTelefono)
         {
             this.nombre = nombre;
             this.direccion = direccion;

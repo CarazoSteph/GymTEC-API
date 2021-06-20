@@ -11,41 +11,41 @@ namespace GymTEC_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TipoPlanillaController : ControllerBase
+    public class ProductoController : ControllerBase
     {
         [HttpPost]
-        [Route("agregarTipoPlanilla")]
+        [Route("agregarProducto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta insertar_TipoPlanilla(TipoPlanilla tipoPlanilla)
+        public respuesta insertar_Producto(Producto producto)
         {
-            Administrador.insertar_TipoPlanilla(tipoPlanilla);
+            Administrador.insertar_Producto(producto);
             return new respuesta("agregado"); 
         }
         
         [HttpPost]
-        [Route("editarTipoPlanilla")]
+        [Route("editarProducto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta editar_TipoPlanilla(TipoPlanilla tipoplanilla)
+        public respuesta editar_Producto(Producto producto)
         {
-            Administrador.editar_TipoPlanilla(tipoplanilla);
+            Administrador.editar_Producto(producto);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("eliminarTipoPlanilla")]
+        [Route("eliminarProducto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta eliminar_TipoPlanilla(TipoPlanilla tipoPlanilla)
+        public respuesta eliminar_Producto(Producto producto)
         {
-            Administrador.eliminar_TipoPlanilla(tipoPlanilla);
+            Administrador.eliminar_Producto(producto);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("buscarTipoPlanilla")]
+        [Route("buscarProducto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<TipoPlanilla> buscar_TipoPlanilla(string entrada)
+        public IList<Producto> buscar_Producto(string entrada)
         {
-            return Administrador.Buscar_TipoPlanilla(entrada);
+            return Administrador.Buscar_Producto(entrada);
             
         }
         

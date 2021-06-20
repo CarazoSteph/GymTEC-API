@@ -11,44 +11,44 @@ namespace GymTEC_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class TipoPlanillaController : ControllerBase
+    public class ServicioController : ControllerBase
     {
+        
         [HttpPost]
-        [Route("agregarTipoPlanilla")]
+        [Route("agregarServicio")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta insertar_TipoPlanilla(TipoPlanilla tipoPlanilla)
+        public respuesta insertar_Servicio(Servicio servicio)
         {
-            Administrador.insertar_TipoPlanilla(tipoPlanilla);
+            Administrador.insertar_Servicio(servicio);
             return new respuesta("agregado"); 
         }
         
         [HttpPost]
-        [Route("editarTipoPlanilla")]
+        [Route("editarServicio")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta editar_TipoPlanilla(TipoPlanilla tipoplanilla)
+        public respuesta editar_Servicio(Servicio servicio)
         {
-            Administrador.editar_TipoPlanilla(tipoplanilla);
+            Administrador.editar_Servicio(servicio);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("eliminarTipoPlanilla")]
+        [Route("eliminarServicio")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta eliminar_TipoPlanilla(TipoPlanilla tipoPlanilla)
+        public respuesta eliminar_Servicio(Servicio servicio)
         {
-            Administrador.eliminar_TipoPlanilla(tipoPlanilla);
+            Administrador.eliminar_Servicio(servicio);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("buscarTipoPlanilla")]
+        [Route("buscarServicio")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<TipoPlanilla> buscar_TipoPlanilla(string entrada)
+        public IList<Servicio> buscar_Servicio(string entrada)
         {
-            return Administrador.Buscar_TipoPlanilla(entrada);
+            return Administrador.Buscar_Servicio(entrada);
             
         }
-        
         
     }
 }
