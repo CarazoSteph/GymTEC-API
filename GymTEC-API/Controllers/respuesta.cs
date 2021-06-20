@@ -40,5 +40,21 @@
 
         public string Contrasena => contrasena;
     }
+    public class BusquedaEntrada
+    {
+        public string busquedaEnt;
+
+        public BusquedaEntrada(string busquedaEnt)
+        {
+            this.busquedaEnt = busquedaEnt;
+                
+        }
+
+        public string BusquedaEnt
+        {
+            get => busquedaEnt;
+            set => busquedaEnt = value;
+        }
+    }
 
 }

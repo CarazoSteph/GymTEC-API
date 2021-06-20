@@ -44,9 +44,9 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("buscarSpa")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<Spa> buscar_Tipo(string entrada)
+        public IList<Spa> buscar_Tipo(BusquedaEntrada entrada)
         {
-            return Administrador.Buscar_Spa(entrada);
+            return Administrador.Buscar_Spa(entrada.busquedaEnt);
         }
         
 

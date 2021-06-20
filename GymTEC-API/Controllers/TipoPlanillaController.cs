@@ -43,9 +43,9 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("buscarTipoPlanilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<TipoPlanilla> buscar_TipoPlanilla(string entrada)
+        public IList<TipoPlanilla> buscar_TipoPlanilla(BusquedaEntrada entrada)
         {
-            return Administrador.Buscar_TipoPlanilla(entrada);
+            return Administrador.Buscar_TipoPlanilla(entrada.busquedaEnt);
             
         }
         

@@ -43,9 +43,9 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("buscarSucursal")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<Sucursal> buscar_Sucursal(string entrada)
+        public IList<Sucursal> buscar_Sucursal(BusquedaEntrada entrada)
         {
-            return Administrador.Buscar_Sucursal(entrada);
+            return Administrador.Buscar_Sucursal(entrada.busquedaEnt);
             
         }
         

@@ -43,9 +43,9 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("buscarPuesto")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<Puesto> buscar_Puesto(string entrada)
+        public IList<Puesto> buscar_Puesto(BusquedaEntrada entrada)
         {
-            return Administrador.Buscar_Puesto(entrada);
+            return Administrador.Buscar_Puesto(entrada.busquedaEnt);
             
         }
         

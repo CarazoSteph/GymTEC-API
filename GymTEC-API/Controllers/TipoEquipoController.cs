@@ -44,9 +44,9 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("buscarTipoDeEquipo")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<TipoDeEquipo> buscar_TipoDeEquipo(string entrada)
+        public IList<TipoDeEquipo> buscar_TipoDeEquipo(BusquedaEntrada entrada)
         {
-            return Administrador.Buscar_TipoDeEquipo(entrada);
+            return Administrador.Buscar_TipoDeEquipo(entrada.busquedaEnt);
             
         }
         

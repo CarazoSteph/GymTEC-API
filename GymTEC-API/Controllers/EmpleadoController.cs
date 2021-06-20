@@ -11,42 +11,42 @@ namespace GymTEC_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ServicioController : ControllerBase
+    public class EmpleadoController : ControllerBase
     {
         
         [HttpPost]
-        [Route("agregarServicio")]
+        [Route("agregarEmpleado")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta insertar_Servicio(Servicio servicio)
+        public respuesta insertar_Empleado(Empleado empleado)
         {
-            Administrador.insertar_Servicio(servicio);
+            Administrador.insertar_Empleado(empleado);
             return new respuesta("agregado"); 
         }
         
         [HttpPost]
-        [Route("editarServicio")]
+        [Route("editarEmpleado")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta editar_Servicio(Servicio servicio)
+        public respuesta editar_Empleado(Empleado empleado)
         {
-            Administrador.editar_Servicio(servicio);
+            Administrador.editar_Empleado(empleado);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("eliminarServicio")]
+        [Route("eliminarEmpleado")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta eliminar_Servicio(Servicio servicio)
+        public respuesta eliminar_Empleado(Empleado empleado)
         {
-            Administrador.eliminar_Servicio(servicio);
+            Administrador.eliminar_Empleado(empleado);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("buscarServicio")]
+        [Route("buscarEmpleado")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<Servicio> buscar_Servicio(BusquedaEntrada entrada)
+        public IList<Empleado> buscar_Empleado(BusquedaEntrada entrada)
         {
-            return Administrador.Buscar_Servicio(entrada.busquedaEnt);
+            return Administrador.Buscar_Empleado(entrada.busquedaEnt);
             
         }
         
