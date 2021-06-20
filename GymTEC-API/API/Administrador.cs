@@ -47,5 +47,11 @@
             
             return "denegar";
         }
+
+        public static void registrarUsuario(Usuario nuevoUsuario)
+        {
+            lista_Usuarios.Add(nuevoUsuario);
+            nuevoUsuario.InsertarUsuarioBaseDatos(nuevoUsuario);
+        }
     }
 }
