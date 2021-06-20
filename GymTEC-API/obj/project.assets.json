@@ -193,23 +193,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Stephanie\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\adria\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Stephanie\\RiderProjects\\GymTEC-API\\GymTEC-API\\GymTEC-API.csproj",
+      "projectUniqueName": "C:\\Users\\adria\\RiderProjects\\GymTEC-API\\GymTEC-API\\GymTEC-API.csproj",
       "projectName": "GymTEC-API",
-      "projectPath": "C:\\Users\\Stephanie\\RiderProjects\\GymTEC-API\\GymTEC-API\\GymTEC-API.csproj",
-      "packagesPath": "C:\\Users\\Stephanie\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Stephanie\\RiderProjects\\GymTEC-API\\GymTEC-API\\obj\\",
+      "projectPath": "C:\\Users\\adria\\RiderProjects\\GymTEC-API\\GymTEC-API\\GymTEC-API.csproj",
+      "packagesPath": "C:\\Users\\adria\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\adria\\RiderProjects\\GymTEC-API\\GymTEC-API\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Stephanie\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\adria\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -256,7 +252,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\adria\\.dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }
