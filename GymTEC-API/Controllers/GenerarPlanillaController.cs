@@ -11,7 +11,7 @@ namespace GymTEC_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GenerarPlanillaController
+    public class GenerarPlanillaController : ControllerBase
     {
         
         [HttpPost]
