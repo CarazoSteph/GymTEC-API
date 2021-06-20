@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace GymTEC_API.DB
@@ -71,6 +72,56 @@ namespace GymTEC_API.DB
             nuevoUsuario.InsertarUsuarioBaseDatos(nuevoUsuario);
         }
 
+        
+        /* Funcionalidad Gestionar Productos*/
+
+        public static void insertar_Producto(Producto producto)
+        {
+            listaProductos.Add(producto);
+        }
+        public static void editar_Producto(Producto producto)
+        {
+            for (int i = 0; i < listaProductos.Count; i++)
+            {
+                if (listaProductos[i].codigoBarras.Equals(producto.codigoBarras))
+                {
+                    listaProductos[i].nombre = producto.nombre;
+                    listaProductos[i].descripcion = producto.descripcion;
+                    listaProductos[i].costo = producto.costo;
+                }
+            }
+        }
+        
+        public static void eliminar_Producto(Producto producto)
+        {
+            for (int i = 0; i < listaProductos.Count; i++)
+            {
+                if (listaProductos[i].codigoBarras.Equals(producto.codigoBarras))
+                {
+                    listaProductos.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<Producto> Buscar_Producto(string busqueda)
+        {
+            IList<Producto> list = new List<Producto>();
+
+            for (int i = 0; i < listaProductos.Count; i++)
+            {
+                if (listaProductos[i].nombre.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaProductos[i]); }
+            
+                if (listaProductos[i].codigoBarras.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaProductos[i]);  }
+            
+                if (listaProductos[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaProductos[i]);  }
+                
+            }
+
+            return list;
+        }
         
         
     }
