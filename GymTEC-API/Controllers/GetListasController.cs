@@ -21,7 +21,7 @@ namespace GymTEC_API.Controllers
         [Route("GetUsuarioActual")]
         public IList<Usuario> Get_UsuarioActual()
         {
-            return Administrador.getUsuarioActual();
+            return new List<Usuario>().Add(Administrador.usuarioActual);
         }
         
         [HttpGet]
@@ -42,77 +42,77 @@ namespace GymTEC_API.Controllers
         [Route("GetClases")]
         public IList<Clases> Get_Clases()
         {
-            return Administrador.getClases();
+            return Administrador.listaClases;
         }
         
         [HttpGet]
         [Route("GetEmpleados")]
         public IList<Empleado> Get_Empleados()
         {
-            return Administrador.getEmpleados();
+            return Administrador.listaEmpleados;
         }
         
         [HttpGet]
         [Route("GetInventario")]
         public IList<Inventario> Get_Inventario()
         {
-            return Administrador.getInventario();
+            return Administrador.listaInventario;
         }
         
         [HttpGet]
         [Route("GetProductos")]
         public IList<Producto> Get_Productos()
         {
-            return Administrador.getProductos();
+            return Administrador.listaProductos;
         }
         
         [HttpGet]
         [Route("GetPuesto")]
         public IList<Puesto> Get_Puesto()
         {
-            return Administrador.getPuesto();
+            return Administrador.listaPuesto;
         }
         
         [HttpGet]
         [Route("GetServicio")]
         public IList<Servicio> Get_Servicio()
         {
-            return Administrador.getServicio();
+            return Administrador.listaServicio;
         }
         
         [HttpGet]
         [Route("GetSpa")]
         public IList<Spa> Get_Spa()
         {
-            return Administrador.getSpa();
+            return Administrador.listaSpa;
         }
         
         [HttpGet]
         [Route("GetSucursal")]
         public IList<Sucursal> Get_Sucursal()
         {
-            return Administrador.getSucusal();
+            return Administrador.listaSucursal;
         }
         
         [HttpGet]
         [Route("GetTipoEquipo")]
         public IList<TipoDeEquipo> Get_TipoEquipo()
         {
-            return Administrador.getTipoEquipo();
+            return Administrador.listaTipoEquipo;
         }
         
         [HttpGet]
         [Route("GetTipoPlanilla")]
         public IList<TipoPlanilla> Get_TipoPlanilla()
         {
-            return Administrador.getTipoPlanilla();
+            return Administrador.listaTipoPlanilla;
         }
         
         [HttpGet]
         [Route("GetUsuario")]
         public IList<Usuario> Get_Usuario()
         {
-            return Administrador.getUsuario();
+            return Administrador.listaUsuario;
         }
         
     }

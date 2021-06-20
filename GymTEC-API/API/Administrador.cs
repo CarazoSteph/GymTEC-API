@@ -1,10 +1,25 @@
-﻿namespace GymTEC_API.DB
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace GymTEC_API.DB
 {
     public class Administrador
     {
         //attributes
         public string correoElectronico;
         private string contrasena;
+        public static Usuario usuarioActual;
+        public static IList<Clases> listaClases;
+        public static IList<Empleado> listaEmpleados;
+        public static IList<Inventario> listaInventario;
+        public static IList<Producto> listaProductos;
+        public static IList<Puesto> listaPuesto;
+        public static IList<Servicio> listaServicio;
+        public static IList<Spa> listaSpa;
+        public static IList<Sucursal> listaSucursal;
+        public static IList<TipoDeEquipo> listaTipoEquipo;
+        public static IList<TipoPlanilla> listaTipoPlanilla;
+        public static IList<Usuario> listaUsuario;
         
         //contruuctor
         public Administrador(string correoElectronico, string contrasena)
