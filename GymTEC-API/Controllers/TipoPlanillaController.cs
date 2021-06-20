@@ -7,48 +7,47 @@ using Microsoft.Extensions.Logging;
 using GymTEC_API.DB;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-
 namespace GymTEC_API.Controllers
-{ 
+{
     [ApiController]
     [Route("[controller]")]
-    public class TratamientoSpaController : ControllerBase
+    public class TipoPlanillaController : ControllerBase
     {
         [HttpPost]
-        [Route("agregarSpa")]
+        [Route("agregarTipoPlanilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta insertar_Spa(Spa spa)
+        public respuesta insertar_TipoPlanilla(TipoPlanilla tipoPlanilla)
         {
-            Administrador.insertar_Spa(spa);
+            Administrador.insertar_TipoPlanilla(tipoPlanilla);
             return new respuesta("agregado"); 
         }
         
         [HttpPost]
-        [Route("editarSpa")]
+        [Route("editarTipoPlanilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta editar_Spa(Spa edicion)
+        public respuesta editar_TipoPlanilla(TipoPlanilla tipoplanilla)
         {
-            Administrador.editar_Spa(edicion);
+            Administrador.editar_TipoPlanilla(tipoplanilla);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("eliminarSpa")]
+        [Route("eliminarTipoPlanilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta eliminar_Spa(Spa spa)
+        public respuesta eliminar_TipoPlanilla(TipoPlanilla tipoPlanilla)
         {
-            Administrador.eliminar_Spa(spa.nombre);
+            Administrador.eliminar_TipoPlanilla(tipoPlanilla);
             return new respuesta("exito");
         }
         
         [HttpPost]
-        [Route("buscarSpa")]
+        [Route("buscarTipoPlanilla")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IList<Spa> buscar_Tipo(string entrada)
+        public IList<TipoPlanilla> buscar_TipoPlanilla(string entrada)
         {
-            return Administrador.Buscar_Spa(entrada);
+            return Administrador.Buscar_TipoPlanilla(entrada);
         }
         
-
+        
     }
 }
