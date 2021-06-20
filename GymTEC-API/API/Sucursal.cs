@@ -1,4 +1,6 @@
-﻿namespace GymTEC_API.DB
+﻿using System.Collections.Generic;
+
+namespace GymTEC_API.DB
 {
     public class Sucursal
     {
@@ -12,6 +14,11 @@
         public int numTelefono;
         public string spa;
         public string tienda;
+        public IList<Spa> listaSpas;
+        public IList<Producto> listaproductos;
+        public IList<Inventario> ListaInventario;
+        public IList<Servicio> ListaServicios;
+        
 
         //contructor
         public Sucursal(string nombre, string direccion, string fechaApertura, string horarioAtencion, string empleadoAdmin, int capacidadMax, int numTelefono)
@@ -25,6 +32,10 @@
             this.numTelefono = numTelefono;
             this.spa =  "off";
             this.tienda = "off";
+            this.listaSpas = new List<Spa>();
+            this.listaproductos = new List<Producto>();
+            this.ListaInventario = new List<Inventario>();
+            this.ListaServicios = new List<Servicio>();
         }
 
         //getters and setters
