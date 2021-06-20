@@ -3,51 +3,27 @@
     public class TipoDeEquipo
     {
         //attributes
-        public string cintasCorrer;
-        public string bicicletasEstacionarias;
-        public string multigimnasios;
-        public string remos;
-        public string pesas;
+        public string id_tipoEquipo;
+        public string descripcion;
 
         //constructor
-        public TipoDeEquipo(string cintasCorrer, string bicicletasEstacionarias, string multigimnasios, string remos, string pesas)
+        public TipoDeEquipo(string idTipoEquipo, string descripcion)
         {
-            this.cintasCorrer = cintasCorrer;
-            this.bicicletasEstacionarias = bicicletasEstacionarias;
-            this.multigimnasios = multigimnasios;
-            this.remos = remos;
-            this.pesas = pesas;
+            id_tipoEquipo = idTipoEquipo;
+            this.descripcion = descripcion;
         }
 
         //getters and setters
-        public string CintasCorrer
+        public string IdTipoEquipo
         {
-            get => cintasCorrer;
-            set => cintasCorrer = value;
+            get => id_tipoEquipo;
+            set => id_tipoEquipo = value;
         }
 
-        public string BicicletasEstacionarias
+        public string Descripcion
         {
-            get => bicicletasEstacionarias;
-            set => bicicletasEstacionarias = value;
-        }
-
-        public string Multigimnasios
-        {
-            get => multigimnasios;
-            set => multigimnasios = value;
-        }
-
-        public string Remos
-        {
-            get => remos;
-            set => remos = value;
-        }
-
-        public string Pesas
-        {
-            get => pesas;
-            set => pesas = value;
+            get => descripcion;
+            set => descripcion = value;
         }
     }
 }

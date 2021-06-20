@@ -3,43 +3,27 @@
     public class Spa
     {
         //atributtes
-        public string masajeRelajante;
-        public string masajeDescargaMuscular;
-        public string sauna;
-        public string banosVapor;
+        public string id_spa;
+        public string nombre;
 
         //constructor
-        public Spa(string masajeRelajante, string masajeDescargaMuscular, string sauna, string banosVapor)
+        public Spa(string idSpa, string nombre)
         {
-            this.masajeRelajante = masajeRelajante;
-            this.masajeDescargaMuscular = masajeDescargaMuscular;
-            this.sauna = sauna;
-            this.banosVapor = banosVapor;
+            id_spa = idSpa;
+            this.nombre = nombre;
         }
 
         //getters and setters
-        public string MasajeRelajante
+        public string IdSpa
         {
-            get => masajeRelajante;
-            set => masajeRelajante = value;
+            get => id_spa;
+            set => id_spa = value;
         }
 
-        public string MasajeDescargaMuscular
+        public string Nombre
         {
-            get => masajeDescargaMuscular;
-            set => masajeDescargaMuscular = value;
-        }
-
-        public string Sauna
-        {
-            get => sauna;
-            set => sauna = value;
-        }
-
-        public string BanosVapor
-        {
-            get => banosVapor;
-            set => banosVapor = value;
+            get => nombre;
+            set => nombre = value;
         }
     }
 }
