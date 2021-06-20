@@ -14,5 +14,30 @@ namespace GymTEC_API.Controllers
     public class GenerarPlanillaController
     {
         
+        [HttpPost]
+        [Route("generarPlanillaMensual")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public List<PlanillaMensual> planillaMensual(Sucursal sucursal)
+        {
+            return Administrador.generarPlanillaMensual(sucursal); 
+        }
+        
+        [HttpPost]
+        [Route("generarPlanillaHoras")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public List<planillaHoras> planillaHoras(Sucursal sucursal)
+        {
+            return Administrador.generarPlanillaHoras(sucursal); 
+        }
+        
+        [HttpPost]
+        [Route("generarPlanillaClases")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public List<planillaClases> planillaClases(Sucursal sucursal)
+        {
+            return Administrador.generarPlanillaClases(sucursal); 
+        }
+        
+        
     }
 }
