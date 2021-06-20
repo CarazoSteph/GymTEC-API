@@ -3,43 +3,27 @@
     public class Servicio
     {
         //atributtes
-        public string indoorCycling;
-        public string pilates;
-        public string yoga;
-        public string natacion;
+        public string nombre_servicio;
+        public string descripcion;
 
         //constructor
-        public Servicio(string indoorCycling, string pilates, string yoga, string natacion)
+        public Servicio(string nombreServicio, string descripcion)
         {
-            this.indoorCycling = indoorCycling;
-            this.pilates = pilates;
-            this.yoga = yoga;
-            this.natacion = natacion;
+            nombre_servicio = nombreServicio;
+            this.descripcion = descripcion;
         }
 
         //getters and setters
-        public string IndoorCycling
+        public string NombreServicio
         {
-            get => indoorCycling;
-            set => indoorCycling = value;
+            get => nombre_servicio;
+            set => nombre_servicio = value;
         }
 
-        public string Pilates
+        public string Descripcion
         {
-            get => pilates;
-            set => pilates = value;
-        }
-
-        public string Yoga
-        {
-            get => yoga;
-            set => yoga = value;
-        }
-
-        public string Natacion
-        {
-            get => natacion;
-            set => natacion = value;
+            get => descripcion;
+            set => descripcion = value;
         }
     }
 }

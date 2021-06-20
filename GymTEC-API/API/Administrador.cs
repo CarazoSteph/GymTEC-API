@@ -2,6 +2,30 @@
 {
     public class Administrador
     {
+        //attributes
+        public string correoElectronico;
+        private string contrasena;
+        
+        //contruuctor
+        public Administrador(string correoElectronico, string contrasena)
+        {
+            this.correoElectronico = correoElectronico;
+            this.contrasena = contrasena;
+        }
+        
+        //getters and setters
+        public string CorreoElectronico
+        {
+            get => correoElectronico;
+            set => correoElectronico = value;
+        }
+
+        public string Contrasena
+        {
+            get => contrasena;
+            set => contrasena = value;
+        }
+
         /*// Funcion que verifica el log in proveniente de la pagina web
         // Entrada: un string con el correo y otro con la contrasena
         // Salida: un string del tipo de usuario que ingresa

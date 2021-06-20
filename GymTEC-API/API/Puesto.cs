@@ -3,43 +3,27 @@
     public class Puesto
     {
         //atributtes
-        public string administrador;
-        public string instructor;
-        public string dependienteSpa;
-        public string dependienteTienda;
+        public string id_puesto;
+        public string descripcion;
 
         //contructor
-        public Puesto(string administrador, string instructor, string dependienteSpa, string dependienteTienda)
+        public Puesto(string idPuesto, string descripcion)
         {
-            this.administrador = administrador;
-            this.instructor = instructor;
-            this.dependienteSpa = dependienteSpa;
-            this.dependienteTienda = dependienteTienda;
+            id_puesto = idPuesto;
+            this.descripcion = descripcion;
         }
 
         //getters and setters
-        public string Administrador
+        public string IdPuesto
         {
-            get => administrador;
-            set => administrador = value;
+            get => id_puesto;
+            set => id_puesto = value;
         }
 
-        public string Instructor
+        public string Descripcion
         {
-            get => instructor;
-            set => instructor = value;
-        }
-
-        public string DependienteSpa
-        {
-            get => dependienteSpa;
-            set => dependienteSpa = value;
-        }
-
-        public string DependienteTienda
-        {
-            get => dependienteTienda;
-            set => dependienteTienda = value;
+            get => descripcion;
+            set => descripcion = value;
         }
     }
 }
