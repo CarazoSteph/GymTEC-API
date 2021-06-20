@@ -9,6 +9,8 @@ namespace GymTEC_API.DB
         public string correoElectronico;
         private string contrasena;
         public static Usuario usuarioActual;
+        public static Empleado empleadoActual;
+        public static Sucursal sucursalActual;
         public static IList<Clases> listaClases;
         public static IList<Empleado> listaEmpleados;
         public static IList<Inventario> listaInventario;
@@ -68,5 +70,8 @@ namespace GymTEC_API.DB
             lista_Usuarios.Add(nuevoUsuario);
             nuevoUsuario.InsertarUsuarioBaseDatos(nuevoUsuario);
         }
+
+        
+        
     }
 }

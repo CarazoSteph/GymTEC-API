@@ -21,21 +21,27 @@ namespace GymTEC_API.Controllers
         [Route("GetUsuarioActual")]
         public IList<Usuario> Get_UsuarioActual()
         {
-            return new List<Usuario>().Add(Administrador.usuarioActual);
+            IList<Usuario> list = new List<Usuario>();
+            list.Add(Administrador.usuarioActual);
+            return list;
         }
         
         [HttpGet]
         [Route("GetAdminActual")]
         public IList<Empleado> Get_AdminActual()
         {
-            return Administrador.getAdminActual();
+            IList<Empleado> list = new List<Empleado>();
+            list.Add(Administrador.empleadoActual);
+            return list;
         }
         
         [HttpGet]
         [Route("GetSucursalActual")]
         public IList<Sucursal> Get_SucursalActual()
         {
-            return Administrador.getSucursalActual();
+            IList<Sucursal> list = new List<Sucursal>();
+            list.Add(Administrador.sucursalActual);
+            return list;
         }
         
         [HttpGet]
