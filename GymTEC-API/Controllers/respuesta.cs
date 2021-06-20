@@ -56,5 +56,117 @@
             set => busquedaEnt = value;
         }
     }
+    
+    public class PlanillaMensual
+    {
+        public string nombre;
+        public int numeroCedula;
+        public int monto;
+
+        public PlanillaMensual(string nombre, int numeroCedula, int monto)
+        {
+            this.nombre = nombre;
+            this.numeroCedula = numeroCedula;
+            this.monto = monto;
+        }
+
+        public string Nombre
+        {
+            get => nombre;
+            set => nombre = value;
+        }
+
+        public int NumeroCedula
+        {
+            get => numeroCedula;
+            set => numeroCedula = value;
+        }
+
+        public int Monto
+        {
+            get => monto;
+            set => monto = value;
+        }
+    }
+
+    public class planillaHoras
+    {
+        public string nombre;
+        public int numeroCedula;
+        public int horas;
+        public int monto;
+
+        public planillaHoras(string nombre, int numeroCedula, int horas, int monto)
+        {
+            this.nombre = nombre;
+            this.numeroCedula = numeroCedula;
+            this.horas = horas;
+            this.monto = monto;
+        }
+
+        public string Nombre
+        {
+            get => nombre;
+            set => nombre = value;
+        }
+
+        public int NumeroCedula
+        {
+            get => numeroCedula;
+            set => numeroCedula = value;
+        }
+
+        public int Horas
+        {
+            get => horas;
+            set => horas = value;
+        }
+
+        public int Monto
+        {
+            get => monto;
+            set => monto = value;
+        }
+    }
+
+    public class planillaClases
+    {
+        public string nombre;
+        public int numeroCedula;
+        public int clases;
+        public int monto;
+
+        public planillaClases(string nombre, int numeroCedula, int clases, int monto)
+        {
+            this.nombre = nombre;
+            this.numeroCedula = numeroCedula;
+            this.clases = clases;
+            this.monto = monto;
+        }
+
+        public string Nombre
+        {
+            get => nombre;
+            set => nombre = value;
+        }
+
+        public int NumeroCedula
+        {
+            get => numeroCedula;
+            set => numeroCedula = value;
+        }
+
+        public int Clases
+        {
+            get => clases;
+            set => clases = value;
+        }
+
+        public int Monto
+        {
+            get => monto;
+            set => monto = value;
+        }
+    }
 
 }
