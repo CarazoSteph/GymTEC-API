@@ -26,7 +26,7 @@
             set => contrasena = value;
         }
 
-        /*// Funcion que verifica el log in proveniente de la pagina web
+        // Funcion que verifica el log in proveniente de la pagina web
         // Entrada: un string con el correo y otro con la contrasena
         // Salida: un string del tipo de usuario que ingresa
         // Restricciones: las entradas deben ser strings
@@ -46,6 +46,6 @@
             }
             
             return "denegar";
-        }*/
+        }
     }
 }
