@@ -123,6 +123,164 @@ namespace GymTEC_API.DB
             return list;
         }
         
+        /* Funcionalidad Gestionar Empleados*/
+        public static void insertar_Empleado(Empleado empleado)
+        {
+            listaEmpleados.Add(empleado);
+        }
+        public static void editar_Empleado(Empleado empleado)
+        {
+            for (int i = 0; i < listaEmpleados.Count; i++)
+            {
+                if (listaEmpleados[i].numCedula.Equals(empleado.numCedula))
+                {
+                    listaEmpleados[i].nombre = empleado.nombre;
+                    listaEmpleados[i].direccion = empleado.direccion;
+                    listaEmpleados[i].puesto = empleado.puesto;
+                    listaEmpleados[i].sucursal = empleado.sucursal;
+                    listaEmpleados[i].tipoPlanilla = empleado.tipoPlanilla;
+                    listaEmpleados[i].salario = empleado.salario;
+                    listaEmpleados[i].correoElectronico = empleado.correoElectronico;
+                    listaEmpleados[i].Password = empleado.Password;
+                }
+            }
+        }
+        
+        public static void eliminar_Empleado(Empleado empleado)
+        {
+            for (int i = 0; i < listaEmpleados.Count; i++)
+            {
+                if (listaEmpleados[i].numCedula.Equals(empleado.numCedula))
+                {
+                    listaEmpleados.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<Empleado> Buscar_Empleado(string busqueda)
+        {
+            IList<Empleado> list = new List<Empleado>();
+
+            for (int i = 0; i < listaEmpleados.Count; i++)
+            {
+                if (listaEmpleados[i].nombre.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaEmpleados[i]); }
+            
+                if (listaEmpleados[i].numCedula.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaEmpleados[i]);  }
+            
+                if (listaEmpleados[i].direccion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaEmpleados[i]);  }
+                
+                if (listaEmpleados[i].puesto.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaEmpleados[i]);  }
+                
+                if (listaEmpleados[i].tipoPlanilla.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaEmpleados[i]);  }
+                
+                if (listaEmpleados[i].salario.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaEmpleados[i]);  }
+                
+                if (listaEmpleados[i].correoElectronico .Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaEmpleados[i]);  }
+                
+                if (listaEmpleados[i].Password.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaEmpleados[i]);  }
+            }
+
+            return list;
+        }
+        
+        /* Funcionalidad Gestionar Puesto*/
+
+        public static void insertar_Puesto(Puesto puesto)
+        {
+            listaPuesto.Add(puesto);
+        }
+        public static void editar_Puesto(Puesto puesto)
+        {
+            for (int i = 0; i < listaPuesto.Count; i++)
+            {
+                if (listaPuesto[i].id_puesto.Equals(puesto.id_puesto))
+                {
+                    listaPuesto[i].descripcion = puesto.descripcion;
+                }
+            }
+        }
+        
+        public static void eliminar_Puesto(Puesto puesto)
+        {
+            for (int i = 0; i < listaPuesto.Count; i++)
+            {
+                if (listaPuesto[i].id_puesto.Equals(puesto.id_puesto))
+                {
+                    listaPuesto.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<Puesto> Buscar_Puesto(string busqueda)
+        {
+            IList<Puesto> list = new List<Puesto>();
+
+            for (int i = 0; i < listaPuesto.Count; i++)
+            {
+                if (listaPuesto[i].id_puesto.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaPuesto[i]); }
+            
+                if (listaPuesto[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaPuesto[i]);  }
+                
+            }
+
+            return list;
+        }
+        
+        /* Funcionalidad Gestionar Servicios*/
+
+        public static void insertar_Servicio(Servicio servicio)
+        {
+            listaServicio.Add(servicio);
+        }
+        
+        public static void editar_Servicio(Servicio servicio)
+        {
+            for (int i = 0; i < listaServicio.Count; i++)
+            {
+                if (listaServicio[i].nombre_servicio.Equals(servicio.nombre_servicio))
+                {
+                    listaServicio[i].descripcion = servicio.descripcion;
+                }
+            }
+        }
+        
+        public static void eliminar_Servicio(Servicio servicio)
+        {
+            for (int i = 0; i < listaServicio.Count; i++)
+            {
+                if (listaServicio[i].nombre_servicio.Equals(servicio.nombre_servicio))
+                {
+                    listaServicio.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<Servicio> Buscar_Servicio(string busqueda)
+        {
+            IList<Servicio> list = new List<Servicio>();
+
+            for (int i = 0; i < listaServicio.Count; i++)
+            {
+                if (listaServicio[i].nombre_servicio.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaServicio[i]); }
+            
+                if (listaServicio[i].descripcion.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaServicio[i]);  }
+                
+            }
+
+            return list;
+        }
         
     }
 }
