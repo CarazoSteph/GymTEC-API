@@ -5,12 +5,12 @@
         //atributtes
         public int id_TipoPlanilla;
         public string descripcion;
-        public string pagoMensual;
-        public string pagoXhora;
-        public string pagoXclase;
+        public int pagoMensual;
+        public int pagoXhora;
+        public int pagoXclase;
 
         //constructor
-        public TipoPlanilla(string pagoMensual, string pagoXhora, string pagoXclase, int id_TipoPlanilla , string descripcion)
+        public TipoPlanilla(int pagoMensual, int pagoXhora, int pagoXclase, int id_TipoPlanilla , string descripcion)
         {
             this.id_TipoPlanilla = id_TipoPlanilla;
             this.descripcion = descripcion;
@@ -32,19 +32,19 @@
             set => descripcion = value;
         }
 
-        public string PagoMensual
+        public int PagoMensual
         {
             get => pagoMensual;
             set => pagoMensual = value;
         }
 
-        public string PagoXhora
+        public int PagoXhora
         {
             get => pagoXhora;
             set => pagoXhora = value;
         }
 
-        public string PagoXclase
+        public int PagoXclase
         {
             get => pagoXclase;
             set => pagoXclase = value;

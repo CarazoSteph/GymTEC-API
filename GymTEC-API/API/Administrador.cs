@@ -383,5 +383,62 @@ namespace GymTEC_API.DB
 
             return list;
         }
+        
+        /* Funcionalidad Gestionar Tipo de Planilla*/
+
+        public static void insertar_TipoPlanilla(TipoPlanilla tipoPlanilla)
+        {
+            listaTipoPlanilla.Add(tipoPlanilla);
+        }
+        
+        public static void editar_TipoPlanilla(TipoPlanilla tipoplanilla)
+        {
+            for (int i = 0; i < listaTipoPlanilla.Count; i++)
+            {
+                if (listaTipoPlanilla[i].id_TipoPlanilla.Equals(tipoplanilla.id_TipoPlanilla))
+                {
+                    listaTipoPlanilla[i].descripcion = tipoplanilla.descripcion;
+                    listaTipoPlanilla[i].pagoMensual = tipoplanilla.pagoMensual;
+                    listaTipoPlanilla[i].pagoXhora = tipoplanilla.pagoXhora;
+                    listaTipoPlanilla[i].pagoXclase = tipoplanilla.pagoXclase;
+                }
+            }
+        }
+        
+        public static void eliminar_TipoPlanilla(TipoPlanilla tipoPlanilla)
+        {
+            for (int i = 0; i < listaTipoPlanilla.Count; i++)
+            {
+                if (listaTipoPlanilla[i].id_TipoPlanilla.Equals(tipoPlanilla.id_TipoPlanilla))
+                {
+                    listaTipoPlanilla.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<TipoPlanilla> Buscar_TipoPlanilla(string busqueda)
+        {
+            IList<TipoPlanilla> list = new List<TipoPlanilla>();
+
+            for (int i = 0; i < listaTipoPlanilla.Count; i++)
+            {
+                if (listaTipoPlanilla[i].id_TipoPlanilla.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaTipoPlanilla[i]); }
+            
+                if (listaTipoPlanilla[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaTipoPlanilla[i]);  }
+                
+                if (listaTipoPlanilla[i].pagoMensual.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaTipoPlanilla[i]);  }
+                
+                if (listaTipoPlanilla[i].pagoXhora.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaTipoPlanilla[i]);  }
+                
+                if (listaTipoPlanilla[i].pagoXclase.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaTipoPlanilla[i]);  }
+            }
+
+            return list;
+        }
     }
 }
