@@ -7,13 +7,15 @@
         public string direccion;
         public string puesto;
         public string sucursal;
-        public string tipoPlanilla;
+        public int tipoPlanilla;
         public int salario;
         public string correoElectronico;
         private string password;
+        public int horasTrabajadas;
+        public int clasesRealizadas;
 
         //constructor
-        public Empleado(int numCedula, string nombre, string direccion, string puesto, string sucursal, string tipoPlanilla, int salario, string correoElectronico, string password)
+        public Empleado(int numCedula, string nombre, string direccion, string puesto, string sucursal, int tipoPlanilla, int salario, string correoElectronico, string password)
         {
             this.numCedula = numCedula;
             this.nombre = nombre;
@@ -24,6 +26,8 @@
             this.salario = salario;
             this.correoElectronico = correoElectronico;
             this.password = password;
+            horasTrabajadas = 0;
+            clasesRealizadas = 0;
         }
 
         //getters and setters
@@ -57,7 +61,7 @@
             set => sucursal = value;
         }
 
-        public string TipoPlanilla
+        public int TipoPlanilla
         {
             get => tipoPlanilla;
             set => tipoPlanilla = value;

@@ -17,10 +17,14 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("registrarseClases")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta RegistrarseClases(Usuario usuario)
+        public respuesta RegistrarseClases(Clases clases)
         {
-            Administrador.registrarUsuarioClase(usuario);
-            return new respuesta("agregado"); 
+            if (Administrador.registrarUsuarioClase(clases) == "agregado")
+            {
+                return new respuesta("agregado");
+            }
+            return new respuesta("lleno");   
+            
         }
         
     }

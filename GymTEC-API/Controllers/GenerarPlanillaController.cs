@@ -17,7 +17,7 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("generarPlanillaMensual")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public List<PlanillaMensual> planillaMensual(Sucursal sucursal)
+        public IList<PlanillaMensual> planillaMensual(Sucursal sucursal)
         {
             return Administrador.generarPlanillaMensual(sucursal); 
         }
@@ -25,7 +25,7 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("generarPlanillaHoras")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public List<planillaHoras> planillaHoras(Sucursal sucursal)
+        public IList<planillaHoras> planillaHoras(Sucursal sucursal)
         {
             return Administrador.generarPlanillaHoras(sucursal); 
         }
@@ -33,7 +33,7 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("generarPlanillaClases")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public List<planillaClases> planillaClases(Sucursal sucursal)
+        public IList<planillaClases> planillaClases(Sucursal sucursal)
         {
             return Administrador.generarPlanillaClases(sucursal); 
         }

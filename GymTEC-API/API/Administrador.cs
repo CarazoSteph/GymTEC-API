@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GymTEC_API.Controllers;
 
 namespace GymTEC_API.DB
 {
@@ -54,10 +55,10 @@ namespace GymTEC_API.DB
             {
                 return "admin";
             }
-            for (int i = 0; i < lista_Usuarios.Count; i++)
+            for (int i = 0; i < listaUsuario.Count; i++)
             {
-                if (lista_Usuarios[i].correo.Equals(loginCorreo) &&
-                    lista_Usuarios[i].Contrasena.Equals(loginContrasena))
+                if (listaUsuario[i].correoElectronico.Equals(loginCorreo) &&
+                    listaUsuario[i].Password.Equals(loginContrasena))
                 {
                     return "usuario";
                 }
@@ -68,8 +69,8 @@ namespace GymTEC_API.DB
 
         public static void registrarUsuario(Usuario nuevoUsuario)
         {
-            lista_Usuarios.Add(nuevoUsuario);
-            nuevoUsuario.InsertarUsuarioBaseDatos(nuevoUsuario);
+            listaUsuario.Add(nuevoUsuario);
+            
         }
 
         
@@ -175,7 +176,7 @@ namespace GymTEC_API.DB
                 if (listaEmpleados[i].puesto.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaEmpleados[i]);  }
                 
-                if (listaEmpleados[i].tipoPlanilla.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                if (listaEmpleados[i].tipoPlanilla.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaEmpleados[i]);  }
                 
                 if (listaEmpleados[i].salario.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
@@ -486,5 +487,357 @@ namespace GymTEC_API.DB
 
             return list;
         }
+        
+        /* Funcionalidad Gestionar Sucursal */
+
+        public static void insertar_Sucursal(Sucursal sucursal)
+        {
+            listaSucursal.Add(sucursal);
+        }
+        
+        public static void editar_Sucursal(Sucursal sucursal)
+        {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursal.nombre))
+                {
+                    listaSucursal[i].direccion = sucursal.direccion;
+                    listaSucursal[i].fechaApertura = sucursal.fechaApertura;
+                    listaSucursal[i].horarioAtencion = sucursal.horarioAtencion;
+                    listaSucursal[i].empleadoAdmin = sucursal.empleadoAdmin;
+                    listaSucursal[i].capacidadMax = sucursal.capacidadMax;
+                    listaSucursal[i].numTelefono = sucursal.numTelefono;
+                    
+                }
+            }
+        }
+        
+        public static void eliminar_Sucursal(Sucursal sucursal)
+        {
+            for (int i = 0; i < listaSpa.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursal.nombre))
+                {
+                    listaSucursal.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<Sucursal> Buscar_Sucursal(string busqueda)
+        {
+            IList<Sucursal> list = new List<Sucursal>();
+
+            for (int i = 0; i < listaSpa.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaSucursal[i]); }
+            
+                if (listaSucursal[i].direccion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaSucursal[i]);  }
+                
+                if (listaSucursal[i].fechaApertura.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaSucursal[i]);  }
+                
+                if (listaSucursal[i].horarioAtencion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaSucursal[i]);  }
+                
+                if (listaSucursal[i].empleadoAdmin.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaSucursal[i]);  }
+                
+                if (listaSucursal[i].capacidadMax.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaSucursal[i]);  }
+                
+                if (listaSucursal[i].numTelefono.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaSucursal[i]);  }
+                
+            }
+
+            return list;
+        }
+
+        public static void ONOFFSPA(Sucursal sucursal)
+        {
+            for (int i = 0; i < listaSpa.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursal.nombre))
+                {
+                    if (listaSucursal[i].spa == "on")
+                    {
+                        listaSucursal[i].spa = "off";
+                    } else if (listaSucursal[i].spa == "off")
+                    {
+                        listaSucursal[i].spa = "on";}
+                }
+            }
+        }
+        public static void ONOFFTIENDA(Sucursal sucursal)
+        {
+            for (int i = 0; i < listaSpa.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursal.nombre))
+                {
+                    if (listaSucursal[i].tienda == "on")
+                    {
+                        listaSucursal[i].tienda = "off";
+                    } else if (listaSucursal[i].tienda == "off")
+                    {
+                        listaSucursal[i].tienda = "on";}
+                }
+            }
+        }
+        
+        /* Funcionalidad Generacion de planilla */
+
+        public static IList<PlanillaMensual> generarPlanillaMensual(Sucursal sucursal)
+        {
+            IList<PlanillaMensual> list = new List<PlanillaMensual>();
+
+            for (int i = 0; i < listaEmpleados.Count; i++)
+            {
+                if (listaEmpleados[i].sucursal.Equals(sucursal.nombre))
+                {
+                    for (int j = 0; j < listaTipoPlanilla.Count; j++)
+                    {
+                        if (listaEmpleados[i].tipoPlanilla.Equals(listaTipoPlanilla[j].id_TipoPlanilla))
+                        {
+                            list.Add(new PlanillaMensual(listaEmpleados[i].nombre,listaEmpleados[i].numCedula,
+                                                            listaTipoPlanilla[j].pagoMensual));
+                        }
+                    }
+                }
+            }
+
+            return list;
+        }
+        public static IList<planillaHoras> generarPlanillaHoras(Sucursal sucursal)
+        {
+            IList<planillaHoras> list = new List<planillaHoras>();
+
+            for (int i = 0; i < listaEmpleados.Count; i++)
+            {
+                if (listaEmpleados[i].sucursal.Equals(sucursal.nombre))
+                {
+                    for (int j = 0; j < listaTipoPlanilla.Count; j++)
+                    {
+                        if (listaEmpleados[i].tipoPlanilla.Equals(listaTipoPlanilla[j].id_TipoPlanilla))
+                        {
+                            list.Add(new planillaHoras(listaEmpleados[i].nombre,listaEmpleados[i].numCedula,
+                                listaEmpleados[i].horasTrabajadas,(listaTipoPlanilla[j].pagoXhora*listaEmpleados[i].horasTrabajadas)));
+                        }
+                    }
+                }
+            }
+
+            return list;
+        }
+        public static IList<planillaClases> generarPlanillaClases(Sucursal sucursal)
+        {
+            IList<planillaClases> list = new List<planillaClases>();
+
+            for (int i = 0; i < listaEmpleados.Count; i++)
+            {
+                if (listaEmpleados[i].sucursal.Equals(sucursal.nombre))
+                {
+                    for (int j = 0; j < listaTipoPlanilla.Count; j++)
+                    {
+                        if (listaEmpleados[i].tipoPlanilla.Equals(listaTipoPlanilla[j].id_TipoPlanilla))
+                        {
+                            list.Add(new planillaClases(listaEmpleados[i].nombre,listaEmpleados[i].numCedula,
+                                listaEmpleados[i].clasesRealizadas,(listaTipoPlanilla[j].pagoXclase*listaEmpleados[i].clasesRealizadas)));
+                        }
+                    }
+                }
+            }
+
+            return list;
+        }
+        
+        /* Funcionalidad Gestionar Clases */
+
+        public static void insertar_Clases(Clases clase)
+        {
+            listaClases.Add(clase);
+            for (int i = 0; i < listaEmpleados.Count; i++)
+            {
+                if (listaEmpleados[i].nombre.Equals(clase.instructor))
+                {
+                    listaEmpleados[i].horasTrabajadas =listaEmpleados[i].horasTrabajadas + 4;
+                    listaEmpleados[i].clasesRealizadas++;
+                }
+            }
+        }
+        public static void eliminar_Clases(Clases clases)
+        {
+            for (int i = 0; i < listaClases.Count; i++)
+            {
+                if (listaClases[i].idClase.Equals(clases.idClase))
+                {
+                    listaSucursal.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<Clases> Buscar_Clases(string busqueda)
+        {
+            IList<Clases> list = new List<Clases>();
+
+            for (int i = 0; i < listaClases.Count; i++)
+            {
+                if (listaClases[i].idClase.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaClases[i]); }
+            
+                if (listaClases[i].tipo.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaClases[i]);  }
+                
+                if (listaClases[i].instructor.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaClases[i]);  }
+                
+                if (listaClases[i].individual.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaClases[i]);  }
+                
+                if (listaClases[i].capacidad.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaClases[i]);  }
+                
+                if (listaClases[i].fecha.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaClases[i]);  }
+                
+                if (listaClases[i].horaInicio.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaClases[i]);  }
+                
+                if (listaClases[i].horaFin.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaClases[i]);  }
+                
+            }
+
+            return list;
+        }
+
+        public static void AsociarSpa(Spa spa)
+        {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
+                {
+                    listaSucursal[i].listaSpas.Add(spa);
+                }
+            }
+        }
+        
+        public static void AsociarProducto(Producto producto)
+        {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
+                {
+                    listaSucursal[i].listaproductos.Add(producto);
+                }
+            }
+        }
+        
+        public static void AsociarInventario(Inventario inventario)
+        {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
+                {
+                    listaSucursal[i].ListaInventario.Add(inventario);
+                }
+            }
+        }
+        
+        public static void AsociarServicio(Servicio servicio)
+        {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
+                {
+                    listaSucursal[i].ListaServicios.Add(servicio);
+                }
+            }
+        }
+        
+        public static void DesasociarSpa(Spa spa)
+        {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
+                {
+                    for (int j = 0; i < listaSucursal[i].listaSpas.Count; j++)
+                    {
+                        if (listaSucursal[i].listaSpas[j].nombre.Equals(spa.nombre))
+                        {
+                            listaSucursal[i].listaSpas.RemoveAt(j);
+                        }
+                    } 
+                }
+            }
+        }
+        public static void DesasociarProducto(Producto producto)
+        {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
+                {
+                    for (int j = 0; i < listaSucursal[i].listaproductos.Count; j++)
+                    {
+                        if (listaSucursal[i].listaproductos[j].codigoBarras.Equals(producto.codigoBarras))
+                        {
+                            listaSucursal[i].listaproductos.RemoveAt(j);
+                        }
+                    } 
+                }
+            }
+        }
+        
+        public static void DesasociarInventario(Inventario inventario)
+        {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
+                {
+                    for (int j = 0; i < listaSucursal[i].ListaInventario.Count; j++)
+                    {
+                        if (listaSucursal[i].ListaInventario[j].numSerie.Equals(inventario.numSerie))
+                        {
+                            listaSucursal[i].ListaInventario.RemoveAt(j);
+                        }
+                    } 
+                }
+            }
+        }
+        
+        public static void DesasociarServicio(Servicio servicio)
+        {
+            for (int i = 0; i < listaSucursal.Count; i++)
+            {
+                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
+                {
+                    for (int j = 0; i < listaSucursal[i].ListaServicios.Count; j++)
+                    {
+                        if (listaSucursal[i].ListaServicios[j].nombre_servicio.Equals(servicio.nombre_servicio))
+                        {
+                            listaSucursal[i].ListaServicios.RemoveAt(j);
+                        }
+                    } 
+                }
+            }
+        }
+        
+        /* Funcionalidad Vista Cliente*/
+
+        public static string registrarUsuarioClase(Clases clases)
+        {
+            for (int i = 0; i < listaClases.Count; i++)
+            {
+                if (listaClases[i].idClase.Equals(clases.idClase))
+                {
+                    if (listaClases[i].capacidad != listaClases[i].ListaUsuarios.Count)
+                        listaClases[i].ListaUsuarios.Add(usuarioActual);
+                    return "agregado";
+                }
+            }
+            return "lleno";
+        }
+        
     }
 }
