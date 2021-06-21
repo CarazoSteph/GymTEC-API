@@ -181,7 +181,7 @@ namespace GymTEC_API.DB
                 if (listaEmpleados[i].salario.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaEmpleados[i]);  }
                 
-                if (listaEmpleados[i].correoElectronico .Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                if (listaEmpleados[i].correoElectronico.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaEmpleados[i]);  }
                 
                 if (listaEmpleados[i].Password.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
@@ -274,7 +274,7 @@ namespace GymTEC_API.DB
                 if (listaServicio[i].nombre_servicio.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaServicio[i]); }
             
-                if (listaServicio[i].descripcion.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                if (listaServicio[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaServicio[i]);  }
                 
             }
@@ -282,5 +282,106 @@ namespace GymTEC_API.DB
             return list;
         }
         
+        /* Funcionalidad Gestionar Inventario*/
+
+        public static void insertar_Inventario(Inventario inventario)
+        {
+            listaInventario.Add(inventario);
+        }
+        public static void editar_Inventario(Inventario inventario)
+        {
+            for (int i = 0; i < listaPuesto.Count; i++)
+            {
+                if (listaInventario[i].numSerie.Equals(inventario.numSerie))
+                {
+                    listaInventario[i].tipoMaquina = inventario.tipoMaquina;
+                    listaInventario[i].marca = inventario.marca;
+                    listaInventario[i].costo = inventario.costo;
+                    listaInventario[i].sucursal = inventario.sucursal;
+                }
+            }
+        }
+        
+        public static void eliminar_Inventario(Inventario inventario)
+        {
+            for (int i = 0; i < listaInventario.Count; i++)
+            {
+                if (listaInventario[i].numSerie.Equals(inventario.numSerie))
+                {
+                    listaInventario.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<Inventario> Buscar_Inventario(string busqueda)
+        {
+            IList<Inventario> list = new List<Inventario>();
+
+            for (int i = 0; i < listaInventario.Count; i++)
+            {
+                if (listaInventario[i].numSerie.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaInventario[i]); }
+                
+                if (listaInventario[i].tipoMaquina.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaInventario[i]); }
+                
+                if (listaInventario[i].marca.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaInventario[i]); }
+                
+                if (listaInventario[i].costo.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaInventario[i]); }
+                
+                if (listaInventario[i].sucursal.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaInventario[i]); }
+            }
+
+            return list;
+        }
+        
+        /* Funcionalidad Gestionar Tipo de Equipo*/
+
+        public static void insertar_TipoDeEquipo(TipoDeEquipo tipoDeEquipo)
+        {
+            listaTipoEquipo.Add(tipoDeEquipo);
+        }
+        
+        public static void editar_TipoDeEquipo(TipoDeEquipo tipoDeEquipo)
+        {
+            for (int i = 0; i < listaTipoEquipo.Count; i++)
+            {
+                if (listaTipoEquipo[i].id_tipoEquipo.Equals(tipoDeEquipo.id_tipoEquipo))
+                {
+                    listaTipoEquipo[i].descripcion = tipoDeEquipo.descripcion;
+                }
+            }
+        }
+        
+        public static void eliminar_TipoDeEquipo(TipoDeEquipo tipoDeEquipo)
+        {
+            for (int i = 0; i < listaTipoEquipo.Count; i++)
+            {
+                if (listaTipoEquipo[i].id_tipoEquipo.Equals(tipoDeEquipo.id_tipoEquipo))
+                {
+                    listaTipoEquipo.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<TipoDeEquipo> Buscar_TipoDeEquipo(string busqueda)
+        {
+            IList<TipoDeEquipo> list = new List<TipoDeEquipo>();
+
+            for (int i = 0; i < listaTipoEquipo.Count; i++)
+            {
+                if (listaTipoEquipo[i].id_tipoEquipo.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaTipoEquipo[i]); }
+            
+                if (listaTipoEquipo[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaTipoEquipo[i]);  }
+                
+            }
+
+            return list;
+        }
     }
 }
