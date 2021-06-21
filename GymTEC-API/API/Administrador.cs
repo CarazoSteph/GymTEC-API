@@ -440,5 +440,51 @@ namespace GymTEC_API.DB
 
             return list;
         }
+        
+        /* Funcionalidad Gestionar Tratamiento Spa */
+
+        public static void insertar_Spa(Spa spa)
+        {
+            listaSpa.Add(spa);
+        }
+        
+        public static void editar_Spa(Spa spa)
+        {
+            for (int i = 0; i < listaSpa.Count; i++)
+            {
+                if (listaSpa[i].id_spa.Equals(spa.id_spa))
+                {
+                    listaSpa[i].nombre = spa.nombre;
+                }
+            }
+        }
+        
+        public static void eliminar_Spa(Spa spa)
+        {
+            for (int i = 0; i < listaSpa.Count; i++)
+            {
+                if (listaSpa[i].id_spa.Equals(spa.id_spa))
+                {
+                    listaSpa.RemoveAt(i);
+                }
+            } 
+        }
+        
+        public static IList<Spa> Buscar_Spa(string busqueda)
+        {
+            IList<Spa> list = new List<Spa>();
+
+            for (int i = 0; i < listaSpa.Count; i++)
+            {
+                if (listaSpa[i].id_spa.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaSpa[i]); }
+            
+                if (listaSpa[i].nombre.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaSpa[i]);  }
+                
+            }
+
+            return list;
+        }
     }
 }

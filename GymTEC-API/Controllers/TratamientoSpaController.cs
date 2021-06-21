@@ -26,9 +26,9 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("editarSpa")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta editar_Spa(Spa edicion)
+        public respuesta editar_Spa(Spa spa)
         {
-            Administrador.editar_Spa(edicion);
+            Administrador.editar_Spa(spa);
             return new respuesta("exito");
         }
         
@@ -37,7 +37,7 @@ namespace GymTEC_API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public respuesta eliminar_Spa(Spa spa)
         {
-            Administrador.eliminar_Spa(spa.nombre);
+            Administrador.eliminar_Spa(spa);
             return new respuesta("exito");
         }
         
