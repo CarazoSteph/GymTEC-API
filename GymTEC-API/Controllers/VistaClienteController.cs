@@ -14,7 +14,14 @@ namespace GymTEC_API.Controllers
     public class VistaClienteController
     {
         
-        
+        [HttpPost]
+        [Route("registrarseClases")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public respuesta RegistrarseClases(Usuario usuario)
+        {
+            Administrador.registrarUsuarioClase(usuario);
+            return new respuesta("agregado"); 
+        }
         
     }
 }
