@@ -7,14 +7,14 @@
         public string nombre;
         public int edad;
         public string fechaNacimiento;
-        public string peso;
-        public string IMC;
+        public int peso;
+        public int IMC;
         public string direccion;
         public string correoElectronico;
         private string password;
 
         //constructor
-        public Usuario(int numCedula, string nombre, int edad, string fechaNacimiento, string peso, string imc, string direccion, string correoElectronico, string password)
+        public Usuario(int numCedula, string nombre, int edad, string fechaNacimiento, int peso, int imc, string direccion, string correoElectronico, string password)
         {
             this.numCedula = numCedula;
             this.nombre = nombre;
@@ -52,13 +52,13 @@
             set => fechaNacimiento = value;
         }
 
-        public string Peso
+        public int Peso
         {
             get => peso;
             set => peso = value;
         }
 
-        public string Imc
+        public int Imc
         {
             get => IMC;
             set => IMC = value;

@@ -3,23 +3,29 @@
     public class Puesto
     {
         //atributtes
-        public string id_puesto;
+        public int idPuesto;
+        public string nombre;
         public string descripcion;
 
         //contructor
-        public Puesto(string idPuesto, string descripcion)
+        public Puesto(int idPuesto, string nombre, string descripcion)
         {
-            id_puesto = idPuesto;
+            this.idPuesto = idPuesto;
+            this.nombre = nombre;
             this.descripcion = descripcion;
         }
 
         //getters and setters
-        public string IdPuesto
+        public int IdPuesto
         {
-            get => id_puesto;
-            set => id_puesto = value;
+            get => idPuesto;
+            set => idPuesto = value;
         }
-
+        public string Nombre
+        {
+            get => nombre;
+            set => nombre = value;
+        }
         public string Descripcion
         {
             get => descripcion;

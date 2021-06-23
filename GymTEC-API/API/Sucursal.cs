@@ -39,6 +39,30 @@ namespace GymTEC_API.DB
         }
 
         //getters and setters
+        public IList<Spa> ListaSpas
+        {
+            get => listaSpas;
+            set => listaSpas = value;
+        }
+
+        public IList<Producto> Listaproductos
+        {
+            get => listaproductos;
+            set => listaproductos = value;
+        }
+
+        public IList<Inventario> ListaInventario1
+        {
+            get => ListaInventario;
+            set => ListaInventario = value;
+        }
+
+        public IList<Servicio> ListaServicios1
+        {
+            get => ListaServicios;
+            set => ListaServicios = value;
+        }
+
         public string Nombre
         {
             get => nombre;

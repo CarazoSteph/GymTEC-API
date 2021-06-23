@@ -3,21 +3,28 @@
     public class Servicio
     {
         //atributtes
-        public string nombre_servicio;
+        public int idServicio;
+        public string nombreServicio;
         public string descripcion;
 
         //constructor
-        public Servicio(string nombreServicio, string descripcion)
+        public Servicio(int idServicio, string nombreServicio, string descripcion)
         {
-            nombre_servicio = nombreServicio;
+            this.idServicio = idServicio;
+            this.nombreServicio = nombreServicio;
             this.descripcion = descripcion;
         }
 
         //getters and setters
+        public int IdServicio
+        {
+            get => idServicio;
+            set => idServicio = value;
+        }
         public string NombreServicio
         {
-            get => nombre_servicio;
-            set => nombre_servicio = value;
+            get => nombreServicio;
+            set => nombreServicio = value;
         }
 
         public string Descripcion

@@ -5,7 +5,7 @@ namespace GymTEC_API.DB
     public class Clases
     {
         //attributes
-        public string idClase;
+        public int idClase;
         public string tipo;
         public string instructor;
         public int individual;
@@ -16,7 +16,7 @@ namespace GymTEC_API.DB
         public IList<Usuario> ListaUsuarios;
 
         //constructor
-        public Clases(string idClase, string tipo, string instructor, int individual, int capacidad, string fecha, string horaInicio, string horaFin)
+        public Clases(int idClase, string tipo, string instructor, int individual, int capacidad, string fecha, string horaInicio, string horaFin)
         {
             this.idClase = idClase;
             this.tipo = tipo;
@@ -29,7 +29,14 @@ namespace GymTEC_API.DB
             ListaUsuarios = new List<Usuario>();
 ;        }
         //getters and setters
-        public string IdClase
+
+        public IList<Usuario> ListaUsuarios1
+        {
+            get => ListaUsuarios;
+            set => ListaUsuarios = value;
+        }
+
+        public int IdClase
         {
             get => idClase;
             set => idClase = value;

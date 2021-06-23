@@ -121,5 +121,31 @@ namespace GymTEC_API.Controllers
             return Administrador.listaUsuario;
         }
         
+        [HttpGet]
+        [Route("GetSpaActual")]
+        public IList<Spa> GetSpaActual()
+        {
+            return Administrador.sucursalActual.listaSpas;
+        }
+        [HttpGet]
+        [Route("GetProductosActual")]
+        public IList<Producto> GetProductosActual()
+        {
+            return Administrador.sucursalActual.listaproductos;
+        }
+        
+        [HttpGet]
+        [Route("GetInventarioActual")]
+        public IList<Inventario> GetInventarioActual()
+        {
+            return Administrador.sucursalActual.ListaInventario;
+        }
+        
+        [HttpGet]
+        [Route("GetServicioActual")]
+        public IList<Servicio> GetServicioActual()
+        {
+            return Administrador.sucursalActual.ListaServicios;
+        }
     }
 }

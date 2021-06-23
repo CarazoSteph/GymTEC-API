@@ -3,16 +3,16 @@
     public class TipoPlanilla
     {
         //atributtes
-        public int id_TipoPlanilla;
+        public int idTipoPlanilla;
         public string descripcion;
         public int pagoMensual;
         public int pagoXhora;
         public int pagoXclase;
 
         //constructor
-        public TipoPlanilla(int pagoMensual, int pagoXhora, int pagoXclase, int id_TipoPlanilla , string descripcion)
+        public TipoPlanilla(int idTipoPlanilla , string descripcion, int pagoMensual, int pagoXhora, int pagoXclase)
         {
-            this.id_TipoPlanilla = id_TipoPlanilla;
+            this.idTipoPlanilla = idTipoPlanilla;
             this.descripcion = descripcion;
             this.pagoMensual = pagoMensual;
             this.pagoXhora = pagoXhora;
@@ -22,8 +22,8 @@
         //getters snd setters
         public int IdTipoPlanilla
         {
-            get => id_TipoPlanilla;
-            set => id_TipoPlanilla = value;
+            get => idTipoPlanilla;
+            set => idTipoPlanilla = value;
         }
 
         public string Descripcion

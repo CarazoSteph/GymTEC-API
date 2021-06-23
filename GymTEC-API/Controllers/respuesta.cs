@@ -36,9 +36,17 @@
             this.contrasena = contrasena;
         }
 
-        public string Correo => correo;
+        public string Correo
+        {
+            get => correo;
+            set => correo = value;
+        }
 
-        public string Contrasena => contrasena;
+        public string Contrasena
+        {
+            get => contrasena;
+            set => contrasena = value;
+        }
     }
     public class BusquedaEntrada
     {

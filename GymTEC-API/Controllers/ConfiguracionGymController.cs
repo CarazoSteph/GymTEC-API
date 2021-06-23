@@ -26,9 +26,9 @@ namespace GymTEC_API.Controllers
         [HttpPost]
         [Route("eliminarClases")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public respuesta eliminar_Clases(Clases empleado)
+        public respuesta eliminar_Clases(Clases clase)
         {
-            Administrador.eliminar_Clases(empleado);
+            Administrador.eliminar_Clases(clase);
             return new respuesta("exito");
         }
         
@@ -108,7 +108,6 @@ namespace GymTEC_API.Controllers
             Administrador.DesasociarServicio(servicio);
             return new respuesta("exito");
         }
-        
         
     }
 }

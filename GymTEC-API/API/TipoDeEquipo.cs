@@ -3,23 +3,29 @@
     public class TipoDeEquipo
     {
         //attributes
-        public string id_tipoEquipo;
+        public int idTipoEquipo;
+        public string nombreTipoEquipo;
         public string descripcion;
 
         //constructor
-        public TipoDeEquipo(string idTipoEquipo, string descripcion)
+        public TipoDeEquipo(int idTipoEquipo, string nombreTipoEquipo, string descripcion)
         {
-            id_tipoEquipo = idTipoEquipo;
+            this.idTipoEquipo = idTipoEquipo;
+            this.nombreTipoEquipo = nombreTipoEquipo;
             this.descripcion = descripcion;
         }
 
         //getters and setters
-        public string IdTipoEquipo
+        public int IdTipoEquipo
         {
-            get => id_tipoEquipo;
-            set => id_tipoEquipo = value;
+            get => idTipoEquipo;
+            set => idTipoEquipo = value;
         }
-
+        public string NombreTipoEquipo
+        {
+            get => nombreTipoEquipo;
+            set => nombreTipoEquipo = value;
+        }
         public string Descripcion
         {
             get => descripcion;

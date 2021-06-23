@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GymTEC_API.BasesDatos;
 using GymTEC_API.Controllers;
+using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
 
 namespace GymTEC_API.DB
 {
@@ -25,11 +28,26 @@ namespace GymTEC_API.DB
         public static IList<TipoPlanilla> listaTipoPlanilla;
         public static IList<Usuario> listaUsuario;
         
+        //Mongo Conection
+        public static MongoDBConnection connMongo = new MongoDBConnection();
+        public static SQLServerConnection connSQLServer = new SQLServerConnection();
+        
         //contruuctor
         public Administrador(string correoElectronico, string contrasena)
         {
             this.correoElectronico = correoElectronico;
             this.contrasena = contrasena;
+            listaClases = new List<Clases>();
+            listaEmpleados = new List<Empleado>();
+            listaInventario = new List<Inventario>();
+            listaProductos = new List<Producto>();
+            listaPuesto = new List<Puesto>();
+            listaServicio = new List<Servicio>();
+            listaSpa = new List<Spa>();
+            listaSucursal = new List<Sucursal>();
+            listaTipoEquipo = new List<TipoDeEquipo>();
+            listaTipoPlanilla = new List<TipoPlanilla>();
+            listaUsuario = new List<Usuario>();
         }
         
         //getters and setters
@@ -51,15 +69,38 @@ namespace GymTEC_API.DB
         // Restricciones: las entradas deben ser strings
         public static string login(string loginCorreo, string loginContrasena)
         {
-            if (loginCorreo.Equals("admin") && loginContrasena.Equals("123"))
+            for (int i = 0; i < listaUsuario.Count; i++)
             {
-                return "admin";
+                if (listaEmpleados[i].correoElectronico.Equals(loginCorreo) &&
+                    listaEmpleados[i].Password.Equals(loginContrasena))
+                {
+                    
+                        empleadoActual = listaEmpleados[i];
+                        try
+                        {
+                        for (int j = 0; j < listaSucursal.Count; j++)
+                        {
+                            if (listaSucursal[j].empleadoAdmin.Equals(listaEmpleados[i].nombre))
+                            {
+                                sucursalActual = listaSucursal[j];
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+
+                    return "admin";
+                }
             }
+
             for (int i = 0; i < listaUsuario.Count; i++)
             {
                 if (listaUsuario[i].correoElectronico.Equals(loginCorreo) &&
                     listaUsuario[i].Password.Equals(loginContrasena))
                 {
+                    usuarioActual = listaUsuario[i];
                     return "usuario";
                 }
             }
@@ -69,6 +110,8 @@ namespace GymTEC_API.DB
 
         public static void registrarUsuario(Usuario nuevoUsuario)
         {
+            connMongo.insertarUsuario(nuevoUsuario);
+            connSQLServer.insertUsuario(nuevoUsuario);
             listaUsuario.Add(nuevoUsuario);
             
         }
@@ -78,10 +121,12 @@ namespace GymTEC_API.DB
 
         public static void insertar_Producto(Producto producto)
         {
+            connSQLServer.insertProducto(producto);
             listaProductos.Add(producto);
         }
         public static void editar_Producto(Producto producto)
         {
+            connSQLServer.updateProducto(producto);
             for (int i = 0; i < listaProductos.Count; i++)
             {
                 if (listaProductos[i].codigoBarras.Equals(producto.codigoBarras))
@@ -95,6 +140,7 @@ namespace GymTEC_API.DB
         
         public static void eliminar_Producto(Producto producto)
         {
+            connSQLServer.eliminarProducto(producto);
             for (int i = 0; i < listaProductos.Count; i++)
             {
                 if (listaProductos[i].codigoBarras.Equals(producto.codigoBarras))
@@ -119,6 +165,9 @@ namespace GymTEC_API.DB
                 if (listaProductos[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaProductos[i]);  }
                 
+                if (listaProductos[i].costo.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaProductos[i]);  }
+                
             }
 
             return list;
@@ -127,12 +176,16 @@ namespace GymTEC_API.DB
         /* Funcionalidad Gestionar Empleados*/
         public static void insertar_Empleado(Empleado empleado)
         {
+            connMongo.insertarEmpleado(empleado);
+            connSQLServer.insertEmpleado(empleado);
             listaEmpleados.Add(empleado);
         }
         public static void editar_Empleado(Empleado empleado)
         {
             for (int i = 0; i < listaEmpleados.Count; i++)
             {
+                connSQLServer.updateEmpleado(empleado);
+                connMongo.EditarEmpleado(empleado);
                 if (listaEmpleados[i].numCedula.Equals(empleado.numCedula))
                 {
                     listaEmpleados[i].nombre = empleado.nombre;
@@ -149,6 +202,8 @@ namespace GymTEC_API.DB
         
         public static void eliminar_Empleado(Empleado empleado)
         {
+            connSQLServer.eliminarEmpleado(empleado);
+            connMongo.EliminarEmpleado(empleado);
             for (int i = 0; i < listaEmpleados.Count; i++)
             {
                 if (listaEmpleados[i].numCedula.Equals(empleado.numCedula))
@@ -196,14 +251,17 @@ namespace GymTEC_API.DB
 
         public static void insertar_Puesto(Puesto puesto)
         {
+            connSQLServer.insertPuesto(puesto);
             listaPuesto.Add(puesto);
         }
         public static void editar_Puesto(Puesto puesto)
         {
+            connSQLServer.UpdatePuesto(puesto);
             for (int i = 0; i < listaPuesto.Count; i++)
             {
-                if (listaPuesto[i].id_puesto.Equals(puesto.id_puesto))
+                if (listaPuesto[i].idPuesto.Equals(puesto.idPuesto))
                 {
+                    listaPuesto[i].nombre = puesto.nombre;
                     listaPuesto[i].descripcion = puesto.descripcion;
                 }
             }
@@ -211,9 +269,10 @@ namespace GymTEC_API.DB
         
         public static void eliminar_Puesto(Puesto puesto)
         {
+            connSQLServer.eliminarPuesto(puesto);
             for (int i = 0; i < listaPuesto.Count; i++)
             {
-                if (listaPuesto[i].id_puesto.Equals(puesto.id_puesto))
+                if (listaPuesto[i].idPuesto.Equals(puesto.idPuesto))
                 {
                     listaPuesto.RemoveAt(i);
                 }
@@ -226,7 +285,10 @@ namespace GymTEC_API.DB
 
             for (int i = 0; i < listaPuesto.Count; i++)
             {
-                if (listaPuesto[i].id_puesto.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                if (listaPuesto[i].idPuesto.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaPuesto[i]); }
+                
+                if (listaPuesto[i].nombre.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaPuesto[i]); }
             
                 if (listaPuesto[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
@@ -241,15 +303,18 @@ namespace GymTEC_API.DB
 
         public static void insertar_Servicio(Servicio servicio)
         {
+            connSQLServer.insertServicio(servicio);
             listaServicio.Add(servicio);
         }
         
         public static void editar_Servicio(Servicio servicio)
         {
+            connSQLServer.updateServicio(servicio);
             for (int i = 0; i < listaServicio.Count; i++)
             {
-                if (listaServicio[i].nombre_servicio.Equals(servicio.nombre_servicio))
+                if (listaServicio[i].nombreServicio.Equals(servicio.nombreServicio))
                 {
+                    listaServicio[i].IdServicio = servicio.IdServicio;
                     listaServicio[i].descripcion = servicio.descripcion;
                 }
             }
@@ -257,9 +322,10 @@ namespace GymTEC_API.DB
         
         public static void eliminar_Servicio(Servicio servicio)
         {
+            connSQLServer.eliminarServicio(servicio);
             for (int i = 0; i < listaServicio.Count; i++)
             {
-                if (listaServicio[i].nombre_servicio.Equals(servicio.nombre_servicio))
+                if (listaServicio[i].nombreServicio.Equals(servicio.nombreServicio))
                 {
                     listaServicio.RemoveAt(i);
                 }
@@ -272,9 +338,12 @@ namespace GymTEC_API.DB
 
             for (int i = 0; i < listaServicio.Count; i++)
             {
-                if (listaServicio[i].nombre_servicio.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                if (listaServicio[i].nombreServicio.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaServicio[i]); }
             
+                if (listaServicio[i].IdServicio.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaServicio[i]);  }
+                
                 if (listaServicio[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaServicio[i]);  }
                 
@@ -287,10 +356,12 @@ namespace GymTEC_API.DB
 
         public static void insertar_Inventario(Inventario inventario)
         {
+            connSQLServer.insertInventario(inventario);
             listaInventario.Add(inventario);
         }
         public static void editar_Inventario(Inventario inventario)
         {
+            connSQLServer.updateinventario(inventario);
             for (int i = 0; i < listaPuesto.Count; i++)
             {
                 if (listaInventario[i].numSerie.Equals(inventario.numSerie))
@@ -305,6 +376,7 @@ namespace GymTEC_API.DB
         
         public static void eliminar_Inventario(Inventario inventario)
         {
+            connSQLServer.eliminarInventario(inventario);
             for (int i = 0; i < listaInventario.Count; i++)
             {
                 if (listaInventario[i].numSerie.Equals(inventario.numSerie))
@@ -343,15 +415,18 @@ namespace GymTEC_API.DB
 
         public static void insertar_TipoDeEquipo(TipoDeEquipo tipoDeEquipo)
         {
+            connSQLServer.insertTipoDeEquipo(tipoDeEquipo);
             listaTipoEquipo.Add(tipoDeEquipo);
         }
         
         public static void editar_TipoDeEquipo(TipoDeEquipo tipoDeEquipo)
         {
+            connSQLServer.updateTipoDeEquipo(tipoDeEquipo);
             for (int i = 0; i < listaTipoEquipo.Count; i++)
             {
-                if (listaTipoEquipo[i].id_tipoEquipo.Equals(tipoDeEquipo.id_tipoEquipo))
+                if (listaTipoEquipo[i].idTipoEquipo.Equals(tipoDeEquipo.idTipoEquipo))
                 {
+                    listaTipoEquipo[i].nombreTipoEquipo = tipoDeEquipo.nombreTipoEquipo;
                     listaTipoEquipo[i].descripcion = tipoDeEquipo.descripcion;
                 }
             }
@@ -359,9 +434,10 @@ namespace GymTEC_API.DB
         
         public static void eliminar_TipoDeEquipo(TipoDeEquipo tipoDeEquipo)
         {
+            connSQLServer.eliminarTipoDeEquipo(tipoDeEquipo);
             for (int i = 0; i < listaTipoEquipo.Count; i++)
             {
-                if (listaTipoEquipo[i].id_tipoEquipo.Equals(tipoDeEquipo.id_tipoEquipo))
+                if (listaTipoEquipo[i].idTipoEquipo.Equals(tipoDeEquipo.idTipoEquipo))
                 {
                     listaTipoEquipo.RemoveAt(i);
                 }
@@ -374,8 +450,11 @@ namespace GymTEC_API.DB
 
             for (int i = 0; i < listaTipoEquipo.Count; i++)
             {
-                if (listaTipoEquipo[i].id_tipoEquipo.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                if (listaTipoEquipo[i].idTipoEquipo.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaTipoEquipo[i]); }
+                
+                if (listaTipoEquipo[i].nombreTipoEquipo.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                { list.Add(listaTipoEquipo[i]);  }
             
                 if (listaTipoEquipo[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaTipoEquipo[i]);  }
@@ -389,14 +468,16 @@ namespace GymTEC_API.DB
 
         public static void insertar_TipoPlanilla(TipoPlanilla tipoPlanilla)
         {
+            connSQLServer.insertTipoPlanilla(tipoPlanilla);
             listaTipoPlanilla.Add(tipoPlanilla);
         }
         
         public static void editar_TipoPlanilla(TipoPlanilla tipoplanilla)
         {
+            connSQLServer.updateTipoPlanilla(tipoplanilla);
             for (int i = 0; i < listaTipoPlanilla.Count; i++)
             {
-                if (listaTipoPlanilla[i].id_TipoPlanilla.Equals(tipoplanilla.id_TipoPlanilla))
+                if (listaTipoPlanilla[i].idTipoPlanilla.Equals(tipoplanilla.idTipoPlanilla))
                 {
                     listaTipoPlanilla[i].descripcion = tipoplanilla.descripcion;
                     listaTipoPlanilla[i].pagoMensual = tipoplanilla.pagoMensual;
@@ -408,9 +489,10 @@ namespace GymTEC_API.DB
         
         public static void eliminar_TipoPlanilla(TipoPlanilla tipoPlanilla)
         {
+            connSQLServer.EliminarTipoPlanilla(tipoPlanilla);
             for (int i = 0; i < listaTipoPlanilla.Count; i++)
             {
-                if (listaTipoPlanilla[i].id_TipoPlanilla.Equals(tipoPlanilla.id_TipoPlanilla))
+                if (listaTipoPlanilla[i].idTipoPlanilla.Equals(tipoPlanilla.idTipoPlanilla))
                 {
                     listaTipoPlanilla.RemoveAt(i);
                 }
@@ -423,7 +505,7 @@ namespace GymTEC_API.DB
 
             for (int i = 0; i < listaTipoPlanilla.Count; i++)
             {
-                if (listaTipoPlanilla[i].id_TipoPlanilla.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                if (listaTipoPlanilla[i].idTipoPlanilla.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaTipoPlanilla[i]); }
             
                 if (listaTipoPlanilla[i].descripcion.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
@@ -446,14 +528,16 @@ namespace GymTEC_API.DB
 
         public static void insertar_Spa(Spa spa)
         {
+            connSQLServer.insertSpa(spa);
             listaSpa.Add(spa);
         }
         
         public static void editar_Spa(Spa spa)
         {
+            connSQLServer.updateSpa(spa);
             for (int i = 0; i < listaSpa.Count; i++)
             {
-                if (listaSpa[i].id_spa.Equals(spa.id_spa))
+                if (listaSpa[i].idSpa.Equals(spa.idSpa))
                 {
                     listaSpa[i].nombre = spa.nombre;
                 }
@@ -462,9 +546,10 @@ namespace GymTEC_API.DB
         
         public static void eliminar_Spa(Spa spa)
         {
+            connSQLServer.eliminarSpa(spa);
             for (int i = 0; i < listaSpa.Count; i++)
             {
-                if (listaSpa[i].id_spa.Equals(spa.id_spa))
+                if (listaSpa[i].idSpa.Equals(spa.idSpa))
                 {
                     listaSpa.RemoveAt(i);
                 }
@@ -477,7 +562,7 @@ namespace GymTEC_API.DB
 
             for (int i = 0; i < listaSpa.Count; i++)
             {
-                if (listaSpa[i].id_spa.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                if (listaSpa[i].idSpa.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaSpa[i]); }
             
                 if (listaSpa[i].nombre.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
@@ -492,11 +577,13 @@ namespace GymTEC_API.DB
 
         public static void insertar_Sucursal(Sucursal sucursal)
         {
+            connSQLServer.insertSucursal(sucursal);
             listaSucursal.Add(sucursal);
         }
         
         public static void editar_Sucursal(Sucursal sucursal)
         {
+            connSQLServer.updateSucursal(sucursal);
             for (int i = 0; i < listaSucursal.Count; i++)
             {
                 if (listaSucursal[i].nombre.Equals(sucursal.nombre))
@@ -514,6 +601,7 @@ namespace GymTEC_API.DB
         
         public static void eliminar_Sucursal(Sucursal sucursal)
         {
+            connSQLServer.eliminarSucursal(sucursal);
             for (int i = 0; i < listaSpa.Count; i++)
             {
                 if (listaSucursal[i].nombre.Equals(sucursal.nombre))
@@ -527,7 +615,7 @@ namespace GymTEC_API.DB
         {
             IList<Sucursal> list = new List<Sucursal>();
 
-            for (int i = 0; i < listaSpa.Count; i++)
+            for (int i = 0; i < listaSucursal.Count; i++)
             {
                 if (listaSucursal[i].nombre.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaSucursal[i]); }
@@ -557,7 +645,7 @@ namespace GymTEC_API.DB
 
         public static void ONOFFSPA(Sucursal sucursal)
         {
-            for (int i = 0; i < listaSpa.Count; i++)
+            for (int i = 0; i < listaSucursal.Count; i++)
             {
                 if (listaSucursal[i].nombre.Equals(sucursal.nombre))
                 {
@@ -572,7 +660,7 @@ namespace GymTEC_API.DB
         }
         public static void ONOFFTIENDA(Sucursal sucursal)
         {
-            for (int i = 0; i < listaSpa.Count; i++)
+            for (int i = 0; i < listaSucursal.Count; i++)
             {
                 if (listaSucursal[i].nombre.Equals(sucursal.nombre))
                 {
@@ -598,7 +686,7 @@ namespace GymTEC_API.DB
                 {
                     for (int j = 0; j < listaTipoPlanilla.Count; j++)
                     {
-                        if (listaEmpleados[i].tipoPlanilla.Equals(listaTipoPlanilla[j].id_TipoPlanilla))
+                        if (listaEmpleados[i].tipoPlanilla.Equals(listaTipoPlanilla[j].idTipoPlanilla))
                         {
                             list.Add(new PlanillaMensual(listaEmpleados[i].nombre,listaEmpleados[i].numCedula,
                                                             listaTipoPlanilla[j].pagoMensual));
@@ -619,7 +707,7 @@ namespace GymTEC_API.DB
                 {
                     for (int j = 0; j < listaTipoPlanilla.Count; j++)
                     {
-                        if (listaEmpleados[i].tipoPlanilla.Equals(listaTipoPlanilla[j].id_TipoPlanilla))
+                        if (listaEmpleados[i].tipoPlanilla.Equals(listaTipoPlanilla[j].idTipoPlanilla))
                         {
                             list.Add(new planillaHoras(listaEmpleados[i].nombre,listaEmpleados[i].numCedula,
                                 listaEmpleados[i].horasTrabajadas,(listaTipoPlanilla[j].pagoXhora*listaEmpleados[i].horasTrabajadas)));
@@ -640,7 +728,7 @@ namespace GymTEC_API.DB
                 {
                     for (int j = 0; j < listaTipoPlanilla.Count; j++)
                     {
-                        if (listaEmpleados[i].tipoPlanilla.Equals(listaTipoPlanilla[j].id_TipoPlanilla))
+                        if (listaEmpleados[i].tipoPlanilla.Equals(listaTipoPlanilla[j].idTipoPlanilla))
                         {
                             list.Add(new planillaClases(listaEmpleados[i].nombre,listaEmpleados[i].numCedula,
                                 listaEmpleados[i].clasesRealizadas,(listaTipoPlanilla[j].pagoXclase*listaEmpleados[i].clasesRealizadas)));
@@ -656,23 +744,32 @@ namespace GymTEC_API.DB
 
         public static void insertar_Clases(Clases clase)
         {
+            connSQLServer.insertClases(clase);
             listaClases.Add(clase);
-            for (int i = 0; i < listaEmpleados.Count; i++)
+            try
             {
-                if (listaEmpleados[i].nombre.Equals(clase.instructor))
+                for (int i = 0; i < listaEmpleados.Count; i++)
                 {
-                    listaEmpleados[i].horasTrabajadas =listaEmpleados[i].horasTrabajadas + 4;
-                    listaEmpleados[i].clasesRealizadas++;
+                    if (listaEmpleados[i].nombre.Equals(clase.instructor))
+                    {
+                        listaEmpleados[i].horasTrabajadas = listaEmpleados[i].horasTrabajadas + 4;
+                        listaEmpleados[i].clasesRealizadas++;
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                return;
             }
         }
         public static void eliminar_Clases(Clases clases)
         {
+            connSQLServer.eliminarClases(clases);
             for (int i = 0; i < listaClases.Count; i++)
             {
                 if (listaClases[i].idClase.Equals(clases.idClase))
                 {
-                    listaSucursal.RemoveAt(i);
+                    listaClases.RemoveAt(i);
                 }
             } 
         }
@@ -683,7 +780,7 @@ namespace GymTEC_API.DB
 
             for (int i = 0; i < listaClases.Count; i++)
             {
-                if (listaClases[i].idClase.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
+                if (listaClases[i].idClase.ToString().Equals(busqueda, StringComparison.OrdinalIgnoreCase))
                 { list.Add(listaClases[i]); }
             
                 if (listaClases[i].tipo.Equals(busqueda, StringComparison.OrdinalIgnoreCase))
@@ -714,46 +811,26 @@ namespace GymTEC_API.DB
 
         public static void AsociarSpa(Spa spa)
         {
-            for (int i = 0; i < listaSucursal.Count; i++)
-            {
-                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
-                {
-                    listaSucursal[i].listaSpas.Add(spa);
-                }
-            }
+            sucursalActual.listaSpas.Add(spa);
         }
         
         public static void AsociarProducto(Producto producto)
         {
-            for (int i = 0; i < listaSucursal.Count; i++)
-            {
-                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
-                {
-                    listaSucursal[i].listaproductos.Add(producto);
-                }
-            }
+           sucursalActual.listaproductos.Add(producto);
+                
         }
         
         public static void AsociarInventario(Inventario inventario)
         {
-            for (int i = 0; i < listaSucursal.Count; i++)
-            {
-                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
-                {
-                    listaSucursal[i].ListaInventario.Add(inventario);
-                }
-            }
+           
+           sucursalActual.ListaInventario.Add(inventario);
+                
         }
         
         public static void AsociarServicio(Servicio servicio)
         {
-            for (int i = 0; i < listaSucursal.Count; i++)
-            {
-                if (listaSucursal[i].nombre.Equals(sucursalActual.nombre))
-                {
-                    listaSucursal[i].ListaServicios.Add(servicio);
-                }
-            }
+           sucursalActual.ListaServicios.Add(servicio);
+                
         }
         
         public static void DesasociarSpa(Spa spa)
@@ -814,7 +891,7 @@ namespace GymTEC_API.DB
                 {
                     for (int j = 0; i < listaSucursal[i].ListaServicios.Count; j++)
                     {
-                        if (listaSucursal[i].ListaServicios[j].nombre_servicio.Equals(servicio.nombre_servicio))
+                        if (listaSucursal[i].ListaServicios[j].nombreServicio.Equals(servicio.nombreServicio))
                         {
                             listaSucursal[i].ListaServicios.RemoveAt(j);
                         }
@@ -827,11 +904,15 @@ namespace GymTEC_API.DB
 
         public static string registrarUsuarioClase(Clases clases)
         {
+            if (clases.capacidad == clases.ListaUsuarios.Count)
+            {
+                return "lleno";
+            }
             for (int i = 0; i < listaClases.Count; i++)
             {
                 if (listaClases[i].idClase.Equals(clases.idClase))
                 {
-                    if (listaClases[i].capacidad != listaClases[i].ListaUsuarios.Count)
+                    if (listaClases[i].capacidad >= listaClases[i].ListaUsuarios.Count)
                         listaClases[i].ListaUsuarios.Add(usuarioActual);
                     return "agregado";
                 }
